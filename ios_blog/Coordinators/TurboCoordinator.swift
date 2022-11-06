@@ -25,7 +25,7 @@ class TurboCoordinator: Coordinator {
     }
 
     override func start() {
-        visit(url: URL(string: "http://localhost:3000/")!)
+        visit(url: URL(string: "http://ios-blog.test/")!)
     }
 
     // MARK: Private
@@ -36,24 +36,29 @@ class TurboCoordinator: Coordinator {
     private func makeSession() -> Session {
         let session = Session()
         session.delegate = self
+        session.pathConfiguration = PathConfiguration(sources: [
+                   .file(Bundle.main.url(forResource: "PathConfiguration", withExtension: "json")!),
+               ])
         return session
     }
 
     private func visit(url: URL, action: VisitAction = .advance, properties: PathProperties = [:]) {
         let viewController = makeViewController(for: url, from: properties)
-
+        let modal = properties["presentation"] as? String == "modal"
         let action: VisitAction = url ==
           session.topmostVisitable?.visitableURL ? .replace : action
-        navigate(to: viewController, via: action)
-        visit(viewController)
+        navigate(to: viewController, via: action, asModal: modal)
+        visit(viewController, as: modal)
     }
 
     private func makeViewController(for url: URL, from properties: PathProperties) -> UIViewController {
         return VisitableViewController(url: url)
     }
 
-    private func navigate(to viewController: UIViewController, via action: VisitAction) {
-         if action == .advance {
+    private func navigate(to viewController: UIViewController, via action: VisitAction, asModal modal: Bool) {
+        if modal {
+            navigationController.present(viewController, animated: true)
+        } else if action == .advance {
             navigationController.pushViewController(viewController, animated: true)
         } else if action == .replace {
             navigationController.dismiss(animated: true)
@@ -63,9 +68,9 @@ class TurboCoordinator: Coordinator {
         }
     }
 
-    private func visit(_ viewController: UIViewController) {
+    private func visit(_ viewController: UIViewController, as modal: Bool) {
         guard let visitable = viewController as? Visitable else { return }
-
+        let session = modal ? modalSession : self.session
         session.visit(visitable)
     }
 }
@@ -73,7 +78,7 @@ class TurboCoordinator: Coordinator {
 
 extension TurboCoordinator: SessionDelegate {
     func session(_ session: Session, didProposeVisit proposal: VisitProposal) {
-          visit(url: proposal.url)
+        visit(url: proposal.url, action: proposal.options.action, properties: proposal.properties)
       }
 
       func session(_ session: Session, didFailRequestForVisitable visitable: Visitable, error: Error) {

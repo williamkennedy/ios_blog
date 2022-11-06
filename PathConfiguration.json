@@ -1,0 +1,13 @@
+{
+  "rules": [
+    {
+      "patterns": [
+        "/new$",
+        "/edit$"
+      ],
+      "properties": {
+        "presentation": "modal"
+      }
+    }
+  ]
+}
