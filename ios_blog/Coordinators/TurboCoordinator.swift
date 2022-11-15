@@ -7,9 +7,13 @@
 
 import Turbo
 import UIKit
+import SafariServices
+import WebKit
 
 
 class TurboCoordinator: Coordinator {
+    
+
     var rootViewController: UIViewController {
         navigationController.tabBarItem = tab()
         return navigationController
@@ -34,7 +38,11 @@ class TurboCoordinator: Coordinator {
     private lazy var modalSession = makeSession()
 
     private func makeSession() -> Session {
-        let session = Session()
+        let configuration = WKWebViewConfiguration()
+        let scriptMessageHandler = ScriptMessageHandler()
+        scriptMessageHandler.delegate = self
+        configuration.userContentController.add(scriptMessageHandler, name: "nativeApp")
+        let session = Session(webViewConfiguration: configuration)
         session.delegate = self
         session.pathConfiguration = PathConfiguration(sources: [
                    .file(Bundle.main.url(forResource: "PathConfiguration", withExtension: "json")!),
@@ -89,3 +97,12 @@ extension TurboCoordinator: SessionDelegate {
           session.reload()
       }
 }
+
+extension TurboCoordinator: ScriptMessageDelegate {
+    // Existing functions.
+    func evaluate(_ name: String) {
+        session.webView.evaluateJavaScript("Bridge.importingContacts('\(name)')")
+    }
+}
+
+

@@ -21,6 +21,8 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSContactsUsageDescription</key>
+	<string>We just want to peek at your contacts</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

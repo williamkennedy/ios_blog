@@ -22,6 +22,7 @@
 		FE4BEFA328C89EE500774187 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4BEFA228C89EE500774187 /* ApplicationCoordinator.swift */; };
 		FE4BEFA828C8A47600774187 /* HelloWorldViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE4BEFA728C8A47600774187 /* HelloWorldViewController.storyboard */; };
 		FE90CB1C2917D32A00696838 /* PathConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = FE90CB1B2917D32A00696838 /* PathConfiguration.json */; };
+		FE90CB1F291815B700696838 /* ScriptMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE90CB1E291815B700696838 /* ScriptMessageHandler.swift */; };
 		FEEA945328CA046B00BF0588 /* TurboCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEA945228CA046B00BF0588 /* TurboCoordinator.swift */; };
 		FEEA945628CA04BA00BF0588 /* Turbo in Frameworks */ = {isa = PBXBuildFile; productRef = FEEA945528CA04BA00BF0588 /* Turbo */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,7 @@
 		FE4BEFA228C89EE500774187 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		FE4BEFA728C8A47600774187 /* HelloWorldViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HelloWorldViewController.storyboard; sourceTree = "<group>"; };
 		FE90CB1B2917D32A00696838 /* PathConfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PathConfiguration.json; sourceTree = "<group>"; };
+		FE90CB1E291815B700696838 /* ScriptMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessageHandler.swift; sourceTree = "<group>"; };
 		FEEA945228CA046B00BF0588 /* TurboCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurboCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +118,7 @@
 		FE4BEF6728C897AD00774187 /* ios_blog */ = {
 			isa = PBXGroup;
 			children = (
+				FE90CB1D2918157D00696838 /* Models */,
 				FE4BEF9B28C89C6C00774187 /* Coordinators */,
 				FE4BEF9928C8986400774187 /* Delegates */,
 				FE4BEF9A28C89C5700774187 /* View Controllers */,
@@ -180,6 +183,14 @@
 				FE4BEFA728C8A47600774187 /* HelloWorldViewController.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FE90CB1D2918157D00696838 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FE90CB1E291815B700696838 /* ScriptMessageHandler.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE90CB1F291815B700696838 /* ScriptMessageHandler.swift in Sources */,
 				FE4BEF9F28C89CAB00774187 /* HelloWorldCoordinator.swift in Sources */,
 				FEEA945328CA046B00BF0588 /* TurboCoordinator.swift in Sources */,
 				FE4BEF9D28C89C8100774187 /* Coordinator.swift in Sources */,
